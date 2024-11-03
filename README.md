@@ -10,3 +10,5 @@ ideally use an ai api call to find 20 similar songs, search them up on spotify a
 
 ## usage
 1. go here https://developer.spotify.com/ for BEARER_TOKEN -> populate .env
+2. populate .env with your openai api token
+3. `yarn && yarn createPlaylist`
