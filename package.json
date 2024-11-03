@@ -1,0 +1,52 @@
+{
+  "name": "stock-sync",
+  "version": "7.0.5",
+  "description": "Syncs stock from providers into OpenSearch",
+  "main": "index.js",
+  "scripts": {
+    "createPlaylist": "tsx src/scripts/createPlaylist.ts",
+    "lint": "eslint --ext .ts .",
+    "tsc": "tsc"
+  },
+  "repository": "git@bitbucket.org:the_league/stock-sync.git",
+  "author": "Autoleague X <contact@autoleague.dev>",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@sentry/esbuild-plugin": "^2.21.1",
+    "@types/lodash": "^4.14.191",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^18.14.0",
+    "dotenv": "^16.0.3",
+    "esbuild": "^0.23.0",
+    "lodash": "^4.17.21",
+    "sinon": "^15.2.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
+    "eslint-config-idom": "ssh://git@bitbucket.org/the_league/eslint-config-idom.git",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "import-sort-parser-typescript": "^6.0.0",
+    "import-sort-style-idom": "git+ssh://git@bitbucket.org/the_league/import-sort-style-idom.git",
+    "prettier": "^2.8.4"
+  },
+  "eslintConfig": {
+    "extends": "idom/ts",
+    "plugins": [
+      "eslint-plugin-prettier"
+    ]
+  },
+  "importSort": {
+    ".ts, .tsx": {
+      "parser": "typescript",
+      "style": "idom",
+      "options": {}
+    }
+  }
+}
