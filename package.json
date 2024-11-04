@@ -1,7 +1,7 @@
 {
-  "name": "stock-sync",
-  "version": "7.0.5",
-  "description": "Syncs stock from providers into OpenSearch",
+  "name": "spotify-ai-playlist",
+  "version": "0.0.1",
+  "description": "Create spotify playlists using ai",
   "main": "index.js",
   "scripts": {
     "createPlaylist": "tsx src/scripts/createPlaylist.ts",
@@ -9,7 +9,7 @@
     "tsc": "tsc"
   },
   "repository": "git@bitbucket.org:the_league/stock-sync.git",
-  "author": "Autoleague X <contact@autoleague.dev>",
+  "author": "Alex Tonkin <atonkin98@gmail.com>",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
@@ -29,24 +29,9 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "eslint": "^8.35.0",
-    "eslint-config-idom": "ssh://git@bitbucket.org/the_league/eslint-config-idom.git",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "import-sort-parser-typescript": "^6.0.0",
-    "import-sort-style-idom": "git+ssh://git@bitbucket.org/the_league/import-sort-style-idom.git",
     "prettier": "^2.8.4"
-  },
-  "eslintConfig": {
-    "extends": "idom/ts",
-    "plugins": [
-      "eslint-plugin-prettier"
-    ]
-  },
-  "importSort": {
-    ".ts, .tsx": {
-      "parser": "typescript",
-      "style": "idom",
-      "options": {}
-    }
   }
 }

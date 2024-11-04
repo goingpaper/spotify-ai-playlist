@@ -6,7 +6,7 @@ interface MeReponse {
 
 const createPlaylist = async () => {
   const authToken = process.env.BEARER_TOKEN;
-
+  const playlistPrompt = `As a factory builder, make me a playlist to automate production to.`;
   // Fetch the current user's Spotify ID
   const userResponse = await fetch('https://api.spotify.com/v1/me', {
     method: 'GET',
@@ -25,7 +25,8 @@ const createPlaylist = async () => {
   const userId = userData.id;
 
   // Create a new playlist
-  const playlistName = 'Brendan Factorio Playlist'; // Replace with your desired playlist name
+
+  const playlistName = await getPlaylistName(playlistPrompt);
   const playlistResponse = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
     method: 'POST',
     headers: {
@@ -49,8 +50,6 @@ const createPlaylist = async () => {
   const playlistId = playlistData.id;
 
   // Create a prompt for OpenAI to find similar songs
-  //const addSong = "American Idiot";
-  const songPrompt = `As a factory builder, make me a playlist to automate production to.`;
   const openAIPrompt = `Find 20 songs related to the previous text and return their titles. 
     The only output i want from you is a list of song titles and nothing else. 
     Dont number the songs or add any extra string output.
@@ -65,7 +64,7 @@ const createPlaylist = async () => {
     },
     body: JSON.stringify({
       model: "gpt-4o",
-      messages: [{ role: "user", content: songPrompt + openAIPrompt }]
+      messages: [{ role: "user", content: playlistPrompt + openAIPrompt }]
     })
   });
 
@@ -120,5 +119,28 @@ const createPlaylist = async () => {
     console.log('Track added to playlist:', songTitle);
   }
 }
+
+const getPlaylistName = async (playlistPrompt: string): Promise<string> => {
+  const playlistNamePrompt = "Create a song playlist name based on the previous sentence. The only output I want from you is the playlist name and no extra output."
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.OPENAI_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: playlistPrompt + playlistNamePrompt }]
+    })
+  });
+
+  if (!response.ok) {
+    console.error('Failed to get playlist name from OpenAI:', response.statusText);
+    return 'Default Playlist Name'; // Fallback name
+  }
+
+  const data = await response.json();
+  return data.choices[0].message.content.trim();
+};
 
 createPlaylist();
